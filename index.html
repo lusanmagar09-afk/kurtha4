@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lunara</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial;
+}
+
+/* Header */
+header {
+    background: linear-gradient(45deg, #ff6f61, #ff9472);
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Products */
+.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    padding: 30px;
+    gap: 20px;
+}
+
+.product {
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    transition: 0.3s;
+}
+
+.product:hover {
+    transform: scale(1.05);
+}
+
+.product img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+.product h3, .product p {
+    padding: 10px;
+    margin: 0;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+}
+
+.modal-content {
+    background: white;
+    margin: 5% auto;
+    padding: 20px;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.modal img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+}
+
+/* Color options */
+.colors {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.color {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    margin: 5px;
+    cursor: pointer;
+    border: 2px solid #ddd;
+}
+
+/* Footer */
+footer {
+    background: #222;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+</style>
+
+</head>
+<body>
+
+<header>
+    <h1>Lunara</h1>
+    <p>Trendy Short Kurtis | Rs. 800 - 2000</p>
+</header>
+
+<div class="products">
+
+<div class="product" onclick="openModal(0)">
+<img src="https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03">
+<h3>Floral Kurti</h3>
+<p>Rs. 800</p>
+</div>
+
+<div class="product" onclick="openModal(1)">
+<img src="https://images.unsplash.com/photo-1594736797933-d0401ba2fe65">
+<h3>Casual Kurti</h3>
+<p>Rs. 1200</p>
+</div>
+
+<div class="product" onclick="openModal(2)">
+<img src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990">
+<h3>Ethnic Kurti</h3>
+<p>Rs. 1500</p>
+</div>
+
+<div class="product" onclick="openModal(3)">
+<img src="https://images.unsplash.com/photo-1622290291468-a28f7a7dc6a8">
+<h3>Party Kurti</h3>
+<p>Rs. 2000</p>
+</div>
+
+</div>
+
+<!-- Modal -->
+<div id="modal" class="modal">
+<div class="modal-content">
+    <span onclick="closeModal()" style="cursor:pointer;font-size:20px;">❌ Close</span>
+    <img id="modalImg">
+    <div class="colors" id="colorOptions"></div>
+</div>
+</div>
+
+<footer>
+<p>Contact: 9861929569</p>
+</footer>
+
+<script>
+const designs = [
+[
+"https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03",
+"https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf",
+"https://images.unsplash.com/photo-1610030469668-1c76b6b65a5f",
+"https://images.unsplash.com/photo-1593032465175-481ac7f401a0"
+],
+[
+"https://images.unsplash.com/photo-1594736797933-d0401ba2fe65",
+"https://images.unsplash.com/photo-1583391733956-6c78276477e3",
+"https://images.unsplash.com/photo-1600185365483-26d7a4cc7519",
+"https://images.unsplash.com/photo-1618354691373-d851c5c3a990"
+],
+[
+"https://images.unsplash.com/photo-1618354691373-d851c5c3a990",
+"https://images.unsplash.com/photo-1620799139834-6b8f844d4a3d",
+"https://images.unsplash.com/photo-1596462502278-27bfdc403348",
+"https://images.unsplash.com/photo-1581044777550-4cfa60707c03"
+],
+[
+"https://images.unsplash.com/photo-1622290291468-a28f7a7dc6a8",
+"https://images.unsplash.com/photo-1583391733976-1c3c6b3f6f4d",
+"https://images.unsplash.com/photo-1611312449412-6cefac5dc3fc",
+"https://images.unsplash.com/photo-1603252109303-2751441dd157"
+]
+];
+
+function openModal(index) {
+    document.getElementById("modal").style.display = "block";
+    changeImage(designs[index][0]);
+
+    let colorDiv = document.getElementById("colorOptions");
+    colorDiv.innerHTML = "";
+
+    designs[index].forEach(img => {
+        let c = document.createElement("div");
+        c.className = "color";
+        c.style.background = "#ccc";
+        c.onclick = () => changeImage(img);
+        colorDiv.appendChild(c);
+    });
+}
+
+function changeImage(src) {
+    document.getElementById("modalImg").src = src;
+}
+
+function closeModal() {
+    document.getElementById("modal").style.display = "none";
+}
+</script>
+
+</body>
+</html>
